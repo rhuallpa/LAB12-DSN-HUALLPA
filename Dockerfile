@@ -1,6 +1,9 @@
 # Usar una imagen base de Python
 FROM python:3.8
 
+
+RUN git clone https://github.com/rhuallpa/LAB12-DSN-HUALLPA.git
+
 # Establecer el directorio de trabajo en /LAB12-DSN-HUALLPA
 WORKDIR /LAB12-DSN-HUALLPA
 
@@ -13,7 +16,6 @@ RUN pip install -r requirements.txt
 # Copiar todo el contenido del directorio actual al directorio de trabajo
 COPY . /LAB12-DSN-HUALLPA/
 
-RUN git clone https://github.com/rhuallpa/LAB12-DSN-HUALLPA.git
 
 # Exponer el puerto 9000 para la aplicación Django
 EXPOSE 9000

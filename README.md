@@ -39,3 +39,57 @@ Para utilizar este proyecto en un entorno local, sigue estos pasos:
     ```
 
 
+## Creación de la Base de Datos en AWS RDS
+
+Accede a AWS Management Console y selecciona el servicio de RDS.
+
+Sigue el asistente de creación de RDS, elige MySQL como motor de base de datos y completa los detalles necesarios, como nombre de la instancia, credenciales, etc. Una vez creada la instancia, anota la información de conexión (endpoint, usuario, contraseña). Modifica el archivo de configuración de la aplicación Django (settings.py) para utilizar la nueva base de datos RDS.
+
+## Creación del Bucket en AWS S3
+
+Accede a AWS Management Console y selecciona el servicio de S3. Crea un nuevo bucket, proporciona un nombre único y configura las opciones según tus necesidades. Anota la URL del bucket y las credenciales de acceso.
+
+## Creación de la Instancia Ubuntu en AWS EC2
+
+Accede a AWS Management Console y selecciona el servicio de EC2. Crea una nueva instancia de Ubuntu siguiendo el asistente, asegurándote de seleccionar una clave SSH para acceder a la instancia. Anota la IP de la instancia y descarga la clave privada generada. Conéctate a la instancia desde tu terminal usando SSH:
+
+    ```bash
+    ssh -i "tu-clave-privada.pem" ubuntu@ip-de-la-instancia
+    ```
+
+
+## Creación del Dockerfile
+Crea un archivo llamado Dockerfile en la raíz del proyecto. Agrega las instrucciones necesarias para construir la imagen Docker. Por ejemplo:
+
+Dockerfile
+
+    ```bash
+    FROM python:3.8
+
+    WORKDIR /app
+    
+    COPY . /app
+    
+    RUN pip install -r requirements.txt
+    
+    EXPOSE 9000
+    
+    CMD ["python", "manage.py", "runserver", "0.0.0.0:9000"]
+        
+    ```
+
+
+## Construye la imagen Docker:
+
+    ```bash
+    docker build -t nombre-de-tu-imagen .
+    ```
+
+## Ejecuta el contenedor:
+
+    ```bash
+    docker run -p 9000:9000 nombre-de-tu-imagen
+    ```
+
+
+
